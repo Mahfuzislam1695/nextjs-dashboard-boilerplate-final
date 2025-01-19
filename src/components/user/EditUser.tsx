@@ -61,10 +61,8 @@ const EditUser: FC<IEditProps> = ({ setEditModalOpen, refetch }) => {
   const name = watch("name");
   const gender = watch("gender");
 
-
   console.log("name", name);
   console.log("gender", gender);
-  
 
   const onSubmit = (data: IFormInput) => {
     alert(JSON.stringify(data));
