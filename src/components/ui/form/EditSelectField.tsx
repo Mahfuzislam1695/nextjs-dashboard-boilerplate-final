@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Controller } from "react-hook-form";
+import { Control, Controller, UseFormResetField } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -9,11 +10,16 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 
+type TData = {
+  id: number;
+  label: string;
+  value: string;
+}
 interface SelectFieldProps {
-  control: any;
-  resetField: any;
+  control: Control<any>;
+  resetField: UseFormResetField<any>;
   name: string;
-  data: any[];
+  data: TData[];
   label: string;
   placeholder: string;
   error?: string;
@@ -24,7 +30,7 @@ interface SelectFieldProps {
   disabledValue: string;
   defaultValue: string;
   isLoading: boolean;
-  makeDisable?: any;
+  makeDisable?: boolean;
 }
 
 const EditSelectField: React.FC<SelectFieldProps> = ({
@@ -39,7 +45,6 @@ const EditSelectField: React.FC<SelectFieldProps> = ({
   error,
   labelKey,
   valueKey,
-  disabledValue,
   defaultValue,
   isLoading,
   makeDisable,
@@ -75,13 +80,13 @@ const EditSelectField: React.FC<SelectFieldProps> = ({
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  {data?.map((item: any) => (
+                  {data?.map((item: TData) => (
                     <SelectItem
-                      key={item[valueKey]}
+                      key={item[valueKey as keyof TData] as string}
                       className="border-b-2 border-brandLsPrimary text-sm text-brandPrimary"
-                      value={item[valueKey]}
+                      value={item[valueKey as keyof TData] as string}
                     >
-                      {item[labelKey]}
+                      {item[labelKey as keyof TData]}
                     </SelectItem>
                   ))}
                 </SelectContent>

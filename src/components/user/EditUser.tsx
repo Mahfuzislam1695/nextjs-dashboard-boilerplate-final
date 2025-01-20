@@ -1,19 +1,18 @@
 "use client";
 
-import { RootState } from "@/redux/Reducer/MainSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import Schema from "./Schema";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAppSelector } from "@/lib/redux/hooks";
 import Input from "../ui/form/Input";
 import EditSelectField from "../ui/form/EditSelectField";
 
 interface IEditProps {
-  setEditModalOpen: Function;
-  refetch: any;
+  setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: () => void;
 }
 
 interface IFormInput {
@@ -43,9 +42,8 @@ const genderData = [
 
 const EditUser: FC<IEditProps> = ({ setEditModalOpen, refetch }) => {
   const [isLoading, setIsLoading] = useState<boolean>();
-
-  const editData = useSelector((state: RootState) => state.Initial.val);
-
+  const {val: editData} = useAppSelector(state => state.user)
+  // console.log(main)
   const resolver = yupResolver(Schema);
 
   const {

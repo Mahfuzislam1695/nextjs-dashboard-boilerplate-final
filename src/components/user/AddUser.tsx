@@ -5,15 +5,15 @@ import { useForm } from "react-hook-form";
 import Input from "../ui/form/Input";
 import SelectField from "../ui/form/SelectField";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import RadioField from "../ui/form/RadioField";
 
 interface IAdd {
   setOpen: (open: boolean) => void;
-  refetch: any;
+  refetch: () => void;
 }
 
-interface IFormInput {
+export interface IFormInput {
   name: string;
   email: string;
   gender: string;
@@ -69,12 +69,11 @@ const AddUser: React.FC<IAdd> = ({ setOpen, refetch }) => {
     formState: { errors },
     reset,
     resetField,
-    watch,
     control,
   } = useForm<IFormInput>({ resolver });
 
-  const name = watch("name");
-  const gender = watch("gender");
+  // const name = watch("name");
+  // const gender = watch("gender");
 
   const onSubmit = (data: IFormInput) => {
     alert(JSON.stringify(data));

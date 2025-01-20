@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import { flexRender } from "@tanstack/react-table";
@@ -15,6 +16,7 @@ type ITable = {
 const TableAll: React.FC<ITable> = ({ table }) => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRowClick = (rowId: string) => {
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(rowId)) {
@@ -32,7 +34,7 @@ const TableAll: React.FC<ITable> = ({ table }) => {
           <thead className="">
             {table
               .getHeaderGroups()
-              .map((headerGroup: { id: string; headers: any[] }) => (
+              .map((headerGroup: { id: string; headers: any[]}) => (
                 <tr key={headerGroup.id} className="">
                   {headerGroup.headers.map((header) => (
                     <th
@@ -63,7 +65,7 @@ const TableAll: React.FC<ITable> = ({ table }) => {
                           <input
                             type="text"
                             className="my-1 px-8 py-1 w-full column-filter bg-white border border-[#D4D4D4] outline-none rounded-md "
-                            onChange={(e : any) =>
+                            onChange={(e) =>
                               header.column.setFilterValue(e.target.value)
                             }
                           />
@@ -80,6 +82,7 @@ const TableAll: React.FC<ITable> = ({ table }) => {
               .getRowModel()
               .rows.map(
                 (
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   row: { id: string; getVisibleCells: () => any[] },
                   index: number
                 ) => (

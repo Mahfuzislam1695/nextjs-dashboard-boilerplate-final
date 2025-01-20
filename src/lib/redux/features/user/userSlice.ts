@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface MainState {
+interface IMainState {
   search: boolean;
   add: boolean;
   toggle: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   val: any;
 }
 
-const initialState: MainState = {
+const initialState: IMainState = {
   search: false,
   add: false,
   toggle: false,
   val: {},
 };
 
-export const MainSlice = createSlice({
+export const userSlice = createSlice({
   name: "Initial",
   initialState,
   reducers: {
@@ -46,10 +47,6 @@ export const {
   handleAddModalClose,
   handleToggle,
   rowValue,
-} = MainSlice.actions;
+} = userSlice.actions;
 
-export default MainSlice.reducer;
-
-export type RootState = {
-  Initial: MainState;
-};
+export default userSlice.reducer;

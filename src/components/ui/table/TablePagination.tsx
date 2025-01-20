@@ -1,15 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	BsFillSkipBackwardFill,
 	BsFillSkipEndFill,
 	BsFillSkipForwardFill,
 	BsFillSkipStartFill,
 } from "react-icons/bs";
-import {
-	RxChevronLeft,
-	RxChevronRight,
-	RxDoubleArrowLeft,
-	RxDoubleArrowRight,
-} from "react-icons/rx";
+
 
 function TablePagination({ table }: { table: any }) {
 	const pageIndex = table.getState().pagination.pageIndex;

@@ -1,13 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { getUsers } from "@/api/api";
-import { rowValue } from "@/redux/Reducer/MainSlice";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import {
-  CellContext,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -23,7 +21,6 @@ import TablePagination from "../ui/table/TablePagination";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   // DialogHeader,
@@ -32,6 +29,8 @@ import {
 import EditUser from "./EditUser";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { rowValue } from "@/lib/redux/features/user/userSlice";
 
 interface EditDataProps {
   name: string;
@@ -40,14 +39,15 @@ interface EditDataProps {
 }
 
 const User = () => {
-  const [editData, setEditData] = useState<EditDataProps | null>(null);
+  // const [editData, setEditData] = useState<EditDataProps | null>(null);
   const [editModalOpen, setEditModalOpen] = useState(false); // State for edit modal
   const [filterModalOpen, setFilterModalOpen] = useState(false); // Separate state for the filter modal
-  const dispatch = useDispatch();
-
-  const handleEdit = (rowData: any) => {
+  const dispatch = useAppDispatch();
+  // const main = useAppSelector(state => state.main)
+  // console.log(main)
+  const handleEdit = (rowData: EditDataProps) => {
     dispatch(rowValue(rowData)); // Dispatching the action to update Redux store
-    setEditData(rowData); // Set the data to edit
+    // setEditData(rowData); // Set the data to edit
     setEditModalOpen(true); // Open the Edit Dialog
   };
 
@@ -78,7 +78,7 @@ const User = () => {
       header: "Action",
       accessor: "edit",
       enableSorting: false,
-      cell: (row: any) => (
+      cell: (row: { row: { original: EditDataProps; }; }) => (
         <div className="flex gap-3 justify-center items-center w-full">
           <button
             onClick={() => handleEdit(row.row.original)}
@@ -93,7 +93,6 @@ const User = () => {
 
   const {
     isLoading,
-    isError,
     data: allUserData,
     refetch,
   } = useQuery({
@@ -101,7 +100,7 @@ const User = () => {
     queryFn: () => getUsers(),
   });
 
-  console.log("allUserData", allUserData);
+  // console.log("allUserData", allUserData);
 
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => allUserData, [allUserData]);

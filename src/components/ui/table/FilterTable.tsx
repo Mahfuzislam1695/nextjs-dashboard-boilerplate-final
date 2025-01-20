@@ -2,33 +2,21 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import {
-//   DropdownMenu,
-//   DropdownMenuCheckboxItem,
-//   DropdownMenuContent,
-//   DropdownMenuSeparator,
-// } from "@/components/ui/dropdown-menu";
-// import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-// import React, { useState } from "react";
-// import { BiExport } from "react-icons/bi";
-// import { RiExportFill } from "react-icons/ri";
-// import { FaFilePdf } from "react-icons/fa6";
-// import { SiMicrosoftexcel } from "react-icons/si";
-// import Link from "next/link";
+import { ReactNode } from "react";
+
 import { MdAdd } from "react-icons/md";
 
 interface IFilter {
   headerName:string;
   filtering: string;
   setFiltering: React.Dispatch<React.SetStateAction<string>>;
-  table: any;
-  data: any;
-  children: any;
+  table: object;
+  data: [];
+  children: ReactNode;
   buttonName: string;
   open: boolean;
   setOpen: (open: boolean) => void;

@@ -1,15 +1,24 @@
+
 import { UseFormRegister } from "react-hook-form";
 
+interface FieldError {
+  message?: string;
+}
+
+interface FormErrors {
+  [key: string]: FieldError | undefined;
+}
 interface FieldInfo {
     inputType: string;
     placeholderText: string;
     name: string;
-    errors: any;
+    errors: FormErrors
     labelName: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: UseFormRegister<any>;
     disabled?: boolean;
     isRequired?: boolean;
-    defaultValue?: any;
+    defaultValue?: string;
   }
 
 const Input: React.FC<FieldInfo> = ({

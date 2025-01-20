@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UseFormRegister } from "react-hook-form";
 
 interface IOptions {
@@ -12,7 +13,7 @@ interface IProps {
   register: UseFormRegister<any>;
   disabled?: boolean;
   isRequired?: boolean;
-  defaultValue?: any;
+  defaultValue?: string;
   data: IOptions[];
   gridCols?: number;
 }
@@ -22,8 +23,6 @@ const RadioField: React.FC<IProps> = ({
   inputName,
   errorMessage,
   register,
-  disabled,
-  defaultValue,
   isRequired,
   data,
   gridCols=3,
